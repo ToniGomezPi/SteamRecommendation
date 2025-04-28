@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Juegos Recomendados - Steam</title>
+    <!-- Cargar Bootstrap desde CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">  <!-- Para los íconos -->
+    <!-- Enlazamos el archivo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Buscar Juegos Recomendados de Steam</h1>
+
+        <!-- Formulario de búsqueda -->
+        <form method="GET" action="/">
+            <div class="form-group" style="position: relative;">
+                <label for="gameTitle">Título del Juego</label>
+                <input type="text" class="form-control" id="gameTitle" name="gameTitle" placeholder="Escribe el título del juego" autocomplete="off">
+                <div id="suggestions" class="list-group mt-2" style="display: none;"></div> <!-- Contenedor para las sugerencias -->
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Buscar</button>
+        </form>
+
+        <hr>
+
+        <!-- Si hay juegos recomendados, los mostramos -->
+        {% if lista_juegos %}
+            <div class="list-group">
+                {% for juego in lista_juegos %}
+                    <div class="list-group-item p-3 mb-2 shadow-sm border rounded">
+                        <h5 class="mb-2 text-dark">{{ juego.title }}</h5>
+                        <p>{{ juego.recommendations }}</p> <!-- Aquí se mostrará la cadena de recomendaciones -->
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Paginación -->
+            <div class="pagination">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item {% if pagination.has_prev %}enabled{% else %}disabled{% endif %}">
+                        <a class="page-link" href="{{ url_for('index', gameTitle=request.args.get('gameTitle'), page=pagination.prev_num) }}">Anterior</a>
+                    </li>
+                    <li class="page-item {% if pagination.has_next %}enabled{% else %}disabled{% endif %}">
+                        <a class="page-link" href="{{ url_for('index', gameTitle=request.args.get('gameTitle'), page=pagination.next_num) }}">Siguiente</a>
+                    </li>
+                </ul>
+            </div>
+        {% else %}
+            <!-- Si no hay resultados, mostramos un mensaje amigable -->
+            <p class="text-muted text-center">No se encontraron resultados. Intenta con otro título.</p>
+        {% endif %}
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Función para mostrar sugerencias en tiempo real
+        $('#gameTitle').on('input', function() {
+            var query = $(this).val();
+            if (query.length > 2) {  // Si el texto tiene más de 2 caracteres
+                $.get('/search_suggestions', { q: query }, function(data) {
+                    if (data.suggestions.length > 0) {
+                        $('#suggestions').empty().show();
+                        data.suggestions.forEach(function(suggestion) {
+                            $('#suggestions').append('<a href="#" class="list-group-item list-group-item-action">' + suggestion + '</a>');
+                        });
+                    } else {
+                        $('#suggestions').hide();
+                    }
+                });
+            } else {
+                $('#suggestions').hide();
+            }
+        });
+
+        // Rellenar el campo de búsqueda al hacer clic en una sugerencia
+        $('#suggestions').on('click', 'a', function() {
+            $('#gameTitle').val($(this).text());
+            $('#suggestions').hide();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+body {
+    background-color: #222222; /* Fondo oscuro */
+    font-family: 'Arial', sans-serif;
+    color: #fff; /* Texto blanco para contraste */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto; /* Centrado y margen */
+    padding: 20px;
+    background-color: #333333; /* Fondo de la caja central en gris oscuro */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Sombra fuerte */
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff4081; /* Color rosa vibrante para el título */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input.form-control {
+    font-size: 1.2rem;
+    padding: 15px 20px;
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #ff4081; /* Borde rosa brillante */
+    background-color: #444444; /* Fondo de campo de entrada oscuro */
+    color: #f5deb3; /* Texto crema claro dentro del campo */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input.form-control:focus {
+    border-color: #03a9f4; /* Borde azul brillante al enfocar */
+    background-color: #555555; /* Fondo un poco más claro al enfocar */
+    outline: none;
+    color: #f5deb3;
+}
+
+#suggestions {
+    position: absolute;
+    z-index: 1000;
+    background-color: #333333;
+    border: 1px solid #ff4081;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 500px;
+    left: 0;
+    top: 100%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    max-height: 200px;
+    display: none;
+}
+
+#suggestions .list-group-item {
+    font-weight: bold;
+    color: #DEB887;
+}
+
+#suggestions .list-group-item:hover {
+    background-color: #03a9f4; /* Azul brillante al pasar el ratón */
+}
+
+.container .list-group-item {
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    color: #f5deb3; /* Texto en crema claro para los resultados de los juegos */
+}
+
+.container .list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item {
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #444444; /* Fondo oscuro para las recomendaciones */
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    color: #f5deb3; /* Texto crema claro para mejorar la legibilidad */
+}
+
+.results .list-group-item {
+    color: #f5deb3; /* Color crema claro para los resultados */
+}
+
+.list-group-item:hover {
+    background-color: #03a9f4; /* Azul brillante al pasar el ratón */
+}
+
+.pagination {
+    justify-content: center;
+}
+
+.pagination .page-link {
+    color: #ff4081; /* Rosa brillante para los enlaces */
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ff4081; /* Rosa brillante para la página activa */
+    border-color: #ff4081;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: #f0f0f0;
+    border-color: #ff4081;
+}
+
+.btn-primary {
+    background-color: #03a9f4; /* Azul brillante para el botón */
+    border-color: #03a9f4;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #0288d1; /* Azul oscuro al pasar el ratón */
+    border-color: #0277bd;
+}
+
+h5 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #f8f9fa
+}
+
+.container p {
+    color: #DC143C;
+    font-weight: bold
+}
+
+.results p {
+    color: #DC143C;
+    font-weight: bold
+}
+
+p {
+    color: #DC143C;
+    font-weight: bold
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #333333; /* Fondo oscuro para el pie de página */
+    color: #ff4081; /* Texto rosa brillante */
+    border-radius: 8px;
+}
